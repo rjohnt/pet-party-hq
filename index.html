@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pet Party HQ</title>
+  <meta name="theme-color" content="#6d28d9" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="https://fav.farm/🧬" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🎮 Pet Party HQ</h1>
+    <p>Track HP, status effects, and care tasks like a Pokémon party.</p>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h2>Quick Battle Log</h2>
+      <p class="muted">Type naturally: “Walked Sabine”, “Fed Shen greens”, “Noah fed”, or “woke up late 10:15”.</p>
+      <div class="quick-log">
+        <input id="quickInput" placeholder="e.g. Walked Sabine" />
+        <button id="quickAddBtn">Log Move</button>
+      </div>
+      <p id="quickResult" class="result"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Catch-up Planner</h2>
+      <p class="muted">If you start late, compress the day and still hit core goals.</p>
+      <div class="quick-log">
+        <input id="wakeTimeInput" type="time" value="09:00" />
+        <button id="recalcBtn">Recalculate Day</button>
+      </div>
+      <div id="planOutput" class="feed" style="margin-top:8px"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Party</h2>
+      <div id="partyGrid" class="party-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Event Feed</h2>
+      <div id="eventFeed" class="feed"></div>
+    </section>
+  </main>
+
+  <template id="petTemplate">
+    <article class="pet-card">
+      <div class="pet-head">
+        <h3 class="pet-name"></h3>
+        <span class="pet-species"></span>
+      </div>
+      <div class="hp-row">
+        <div class="hp-bar"><div class="hp-fill"></div></div>
+        <span class="hp-text"></span>
+      </div>
+      <p class="status-list"></p>
+      <p class="xp-level"></p>
+      <div class="tasks"></div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
