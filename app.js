@@ -1,4 +1,9 @@
 const STORAGE_KEY = 'pet-party-hq-v1';
+const PET_ICONS = {
+  sabine: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f436.svg', // dog face
+  shen: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f98e.svg',   // lizard
+  noah: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f40d.svg'    // snake
+};
 
 const defaultState = {
   pets: [
@@ -73,10 +78,14 @@ function render() {
     const node = tpl.content.cloneNode(true);
     node.querySelector('.pet-name').textContent = pet.name;
     node.querySelector('.pet-species').textContent = pet.species;
+    const iconEl = node.querySelector('.pet-icon');
+    iconEl.src = PET_ICONS[pet.id] || 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f43e.svg';
+    iconEl.alt = `${pet.name} icon`;
+
     const hpPct = Math.max(0, Math.min(100, (pet.hp / pet.maxHp) * 100));
     const hpFill = node.querySelector('.hp-fill');
     hpFill.style.width = `${hpPct}%`;
-    hpFill.style.background = hpPct >= 70 ? 'var(--good)' : hpPct >= 40 ? 'var(--warn)' : 'var(--bad)';
+    hpFill.style.background = hpPct >= 70 ? 'var(--hp-good)' : hpPct >= 40 ? 'var(--hp-mid)' : 'var(--hp-low)';
     node.querySelector('.hp-text').textContent = `${pet.hp}/${pet.maxHp} HP`;
     node.querySelector('.status-list').textContent = `Status: ${pet.statusEffects.length ? pet.statusEffects.join(', ') : 'Normal'}`;
     node.querySelector('.xp-level').textContent = `Lv ${pet.level} • XP ${pet.xp}`;
@@ -187,6 +196,68 @@ function parseQuickText(text) {
 
 function log(message) {
   state.log.push({ ts: Date.now(), message });
+}
+
+function normalizeTime(raw) {
+  const [h, m] = raw.split(':').map(Number);
+  const hh = Math.max(0, Math.min(23, h || 0));
+  const mm = Math.max(0, Math.min(59, m || 0));
+  return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
+}
+
+function nowTimeHHMM() {
+  const d = new Date();
+  return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+}
+
+function toMins(hhmm) {
+  const [h, m] = hhmm.split(':').map(Number);
+  return (h * 60) + m;
+}
+
+function minsToLabel(total) {
+  const h24 = Math.floor(total / 60);
+  const m = total % 60;
+  const ampm = h24 >= 12 ? 'PM' : 'AM';
+  const h12 = h24 % 12 || 12;
+  return `${h12}:${String(m).padStart(2, '0')} ${ampm}`;
+}
+
+function renderCatchupPlan(wakeHHMM) {
+  const wake = toMins(normalizeTime(wakeHHMM));
+  const dayEnd = 21 * 60; // 9:00 PM
+
+  const goals = [
+    { name: 'Must-Win Focus Block', mins: 90 },
+    { name: 'Admin Sweep', mins: 20 },
+    { name: 'House Reset Sprint', mins: 20 },
+    { name: 'Sabine Walk Quest', mins: 20 },
+    { name: 'Meal Prep / Inventory', mins: 20 }
+  ];
+
+  const totalGoalMins = goals.reduce((a, g) => a + g.mins, 0);
+  const available = Math.max(0, dayEnd - wake - 30); // keep 30-min buffer
+  const scale = available < totalGoalMins ? (available / totalGoalMins) : 1;
+
+  let cursor = wake + 10; // startup buffer
+  const lines = [];
+  lines.push(`<div class="feed-item"><strong>Wake:</strong> ${minsToLabel(wake)} • <strong>Day End:</strong> ${minsToLabel(dayEnd)}</div>`);
+
+  goals.forEach(g => {
+    const dur = Math.max(10, Math.round(g.mins * scale / 5) * 5);
+    const start = cursor;
+    const end = Math.min(dayEnd, start + dur);
+    lines.push(`<div class="feed-item"><strong>${g.name}</strong><br>${minsToLabel(start)} → ${minsToLabel(end)} (${dur}m)</div>`);
+    cursor = end + 10;
+  });
+
+  if (scale < 1) {
+    lines.push('<div class="feed-item"><span class="tag">Compressed mode active: shorter blocks, same priorities. Never miss twice.</span></div>');
+  } else {
+    lines.push('<div class="feed-item"><span class="tag">Normal mode: full blocks scheduled.</span></div>');
+  }
+
+  planOutput.innerHTML = lines.join('');
 }
 
 function registerSW() {

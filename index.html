@@ -7,6 +7,9 @@
   <meta name="theme-color" content="#6d28d9" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="https://fav.farm/🧬" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -50,8 +53,13 @@
   <template id="petTemplate">
     <article class="pet-card">
       <div class="pet-head">
-        <h3 class="pet-name"></h3>
-        <span class="pet-species"></span>
+        <div class="pet-title-wrap">
+          <img class="pet-icon" alt="" />
+          <div>
+            <h3 class="pet-name"></h3>
+            <span class="pet-species"></span>
+          </div>
+        </div>
       </div>
       <div class="hp-row">
         <div class="hp-bar"><div class="hp-fill"></div></div>
