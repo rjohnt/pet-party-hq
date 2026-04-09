@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-08T20:03:55-05:00",
+  "updated_at": "2026-04-08T23:11:55-05:00",
   "party": [
     {
       "name": "Sabine",
@@ -93,19 +93,19 @@
     {
       "name": "Noah",
       "species": "California King Snake",
-      "hp": 90,
+      "hp": 93,
       "max_hp": 100,
       "status_effects": [
-        "Feed Window Pending"
+        "Normal"
       ],
-      "xp": 0,
+      "xp": 5,
       "level": 8,
       "tasks": [
         {
           "id": "noah_feed",
           "label": "Feed",
           "cadence": "weekly",
-          "last_done": null
+          "last_done": "2026-04-08T23:11:42-05:00"
         },
         {
           "id": "noah_bedding",
@@ -129,6 +129,18 @@
         "hp": 3
       },
       "note": "Walk done"
+    },
+    {
+      "ts": "2026-04-08T23:11:42-05:00",
+      "actor": "user",
+      "event": "task_done",
+      "pet": "Noah",
+      "task_id": "noah_feed",
+      "delta": {
+        "xp": 5,
+        "hp": 3
+      },
+      "note": "Fed Noah a mouse"
     }
   ]
 }
