@@ -1,6 +1,6 @@
 {
-  "name": "Pet Party HQ",
-  "short_name": "PetParty",
+  "name": "PawkéDex",
+  "short_name": "PawkéDex",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#f8f8f8",

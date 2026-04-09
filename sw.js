@@ -1,4 +1,4 @@
-const CACHE = 'pet-party-hq-v2';
+const CACHE = 'pawkedex-v3';
 const ASSETS = ['./', './index.html', './styles.css', './app.js', './state.json', './manifest.webmanifest'];
 
 self.addEventListener('install', e => {

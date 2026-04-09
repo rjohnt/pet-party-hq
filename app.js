@@ -1,4 +1,5 @@
-const STORAGE_KEY = 'pet-party-hq-v2';
+const STORAGE_KEY = 'pawkedex-v3';
+const LEGACY_STORAGE_KEYS = ['pet-party-hq-v2'];
 const PET_ICONS = {
   sabine: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f436.svg',
   shen: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f98e.svg',
@@ -45,9 +46,25 @@ function chooseNewestState(a, b) {
 }
 
 function loadLocalState() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return null;
-  try { return JSON.parse(raw); } catch { return null; }
+  const currentRaw = localStorage.getItem(STORAGE_KEY);
+  if (currentRaw) {
+    try { return JSON.parse(currentRaw); } catch { return null; }
+  }
+
+  // One-time migration from older app keys.
+  for (const key of LEGACY_STORAGE_KEYS) {
+    const raw = localStorage.getItem(key);
+    if (!raw) continue;
+    try {
+      const parsed = JSON.parse(raw);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      return parsed;
+    } catch {
+      // ignore malformed legacy payloads
+    }
+  }
+
+  return null;
 }
 
 async function loadRemoteState() {
