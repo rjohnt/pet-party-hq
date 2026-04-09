@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "updated_at": "2026-04-08T20:03:55-05:00",
+  "party": [
+    {
+      "name": "Sabine",
+      "species": "Cavalier King Charles Spaniel",
+      "hp": 95,
+      "max_hp": 100,
+      "status_effects": [
+        "Normal"
+      ],
+      "xp": 5,
+      "level": 7,
+      "tasks": [
+        {
+          "id": "sabine_feed_am",
+          "label": "Breakfast",
+          "cadence": "daily",
+          "last_done": null
+        },
+        {
+          "id": "sabine_feed_pm",
+          "label": "Dinner",
+          "cadence": "daily",
+          "last_done": null
+        },
+        {
+          "id": "sabine_walk",
+          "label": "Walk / Exercise",
+          "cadence": "daily",
+          "last_done": "2026-04-08T20:03:55-05:00"
+        },
+        {
+          "id": "sabine_med_monthly",
+          "label": "Simparica Trio",
+          "cadence": "monthly",
+          "last_done": null
+        },
+        {
+          "id": "sabine_vet",
+          "label": "Vet follow-up",
+          "cadence": "as_needed",
+          "last_done": null
+        }
+      ],
+      "id": "sabine"
+    },
+    {
+      "name": "Shen",
+      "species": "Bearded Dragon",
+      "hp": 88,
+      "max_hp": 100,
+      "status_effects": [
+        "Needs Greens"
+      ],
+      "xp": 0,
+      "level": 8,
+      "tasks": [
+        {
+          "id": "shen_greens",
+          "label": "Greens",
+          "cadence": "daily",
+          "last_done": null
+        },
+        {
+          "id": "shen_bugs",
+          "label": "Bugs",
+          "cadence": "every_4_days",
+          "last_done": null
+        },
+        {
+          "id": "shen_clean_weekly",
+          "label": "Enclosure clean (medium)",
+          "cadence": "weekly",
+          "last_done": null
+        },
+        {
+          "id": "shen_deep_clean",
+          "label": "Enclosure deep clean",
+          "cadence": "monthly",
+          "last_done": null
+        },
+        {
+          "id": "shen_uvb",
+          "label": "UVB bulb replace",
+          "cadence": "every_183_days",
+          "last_done": null
+        }
+      ],
+      "id": "shen"
+    },
+    {
+      "name": "Noah",
+      "species": "California King Snake",
+      "hp": 90,
+      "max_hp": 100,
+      "status_effects": [
+        "Feed Window Pending"
+      ],
+      "xp": 0,
+      "level": 8,
+      "tasks": [
+        {
+          "id": "noah_feed",
+          "label": "Feed",
+          "cadence": "weekly",
+          "last_done": null
+        },
+        {
+          "id": "noah_bedding",
+          "label": "Change bedding",
+          "cadence": "monthly",
+          "last_done": null
+        }
+      ],
+      "id": "noah"
+    }
+  ],
+  "log": [
+    {
+      "ts": "2026-04-08T20:03:55-05:00",
+      "actor": "user",
+      "event": "task_done",
+      "pet": "Sabine",
+      "task_id": "sabine_walk",
+      "delta": {
+        "xp": 5,
+        "hp": 3
+      },
+      "note": "Walk done"
+    }
+  ]
+}

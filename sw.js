@@ -1,5 +1,5 @@
 const CACHE = 'pet-party-hq-v2';
-const ASSETS = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest'];
+const ASSETS = ['./', './index.html', './styles.css', './app.js', './state.json', './manifest.webmanifest'];
 
 self.addEventListener('install', e => {
   self.skipWaiting();
