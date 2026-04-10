@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-04-08T23:19:49-05:00",
+  "updated_at": "2026-04-10T11:42:48-05:00",
   "party": [
     {
       "name": "Sabine",
@@ -49,12 +49,12 @@
     {
       "name": "Shen",
       "species": "Bearded Dragon",
-      "hp": 88,
+      "hp": 91,
       "max_hp": 100,
       "status_effects": [
         "Needs Greens"
       ],
-      "xp": 0,
+      "xp": 5,
       "level": 8,
       "tasks": [
         {
@@ -67,7 +67,7 @@
           "id": "shen_bugs",
           "label": "Bugs",
           "cadence": "every_4_days",
-          "last_done": null
+          "last_done": "2026-04-09T23:17:22-05:00"
         },
         {
           "id": "shen_clean_weekly",
@@ -141,6 +141,18 @@
         "hp": 3
       },
       "note": "Fed Noah a mouse"
+    },
+    {
+      "ts": "2026-04-09T23:17:22-05:00",
+      "actor": "user",
+      "event": "task_done",
+      "pet": "Shen",
+      "task_id": "shen_bugs",
+      "delta": {
+        "xp": 5,
+        "hp": 3
+      },
+      "note": "Fed two dubias"
     }
   ]
 }
